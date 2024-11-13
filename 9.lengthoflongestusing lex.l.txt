@@ -1,0 +1,20 @@
+%{ 
+#include<stdio.h>
+int counter=0;
+int currentlen=0;
+%} 
+%% 
+[a-zA-Z]+ {
+currentlen=yyleng;
+if(currentlen > counter) 
+{ 
+counter = currentlen; 
+}
+} 
+%% 
+int yywrap(){}
+int main() 
+{ 
+yylex(); 
+printf("largest: %d", counter);  
+}

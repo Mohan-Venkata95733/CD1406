@@ -1,0 +1,19 @@
+%{
+int l = 0, w = 0, c = 0;
+%}
+%% 
+\n      { l++; }
+[ ]+    { /* skip spaces */ }
+[a-zA-Z0-9]+ { w++; c += yyleng; }  
+.       { c++; } 
+%%
+int yywrap() { return 1; }
+int main() 
+{
+yyin = fopen("linewordchar.txt", "r");
+yylex();
+printf("Number of lines: %d\n", l);
+printf("Number of words: %d\n", w);
+printf("Number of characters: %d\n", c);
+return 0;
+}
